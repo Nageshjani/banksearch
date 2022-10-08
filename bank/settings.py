@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-b^=3u860vgwa4c@q$kz75iys1zoyxl^x#av)f#n&%y=u602dcm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['banksearch4.herokuapp.com','127.0.0.1:8000','127.0.0.1']
+ALLOWED_HOSTS = ['banksearch4.herokuapp.com','127.0.0.1:8000','127.0.0.1','banksearch44.herokuapp.com']
 
 
 # Application definition
