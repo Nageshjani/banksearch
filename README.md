@@ -28,7 +28,7 @@ For Backend: **Python Django**
    * 'Output': Branch Details
  
 
-To import db in postgres: *psql indian_bank < indian_banks.sql*
+
  
 # Running The Serverpython manage.py runserver
 
