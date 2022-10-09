@@ -30,7 +30,7 @@ For Backend: **Python Django**
 
 
  
-# Running The Serverpython manage.py runserver
+# Running The Server python manage.py runserver
 
 # Migrate python manage.py migrate
 
