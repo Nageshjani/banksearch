@@ -1,10 +1,9 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import  JsonResponse
 from django.shortcuts import render
 from bank_store.models import *
 import json
-import pandas as pd
-from  django.db import transaction
-from rest_framework.exceptions import NotFound
+
+
 
 
 
