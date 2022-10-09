@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,32 +80,14 @@ WSGI_APPLICATION = 'bank.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'banksearch2',
-        'USER':'nagesh4',
-        'PASSWORD':'jani12345',
-        'HOST':'database-1.cjhv6yrtk2mj.ap-south-1.rds.amazonaws.com',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER':os.environ.get('DB_USER'),
+        'PASSWORD':os.environ.get('DB_PASS'),
+        'HOST':os.environ.get('DB_HOST'),
         'PORT':'5432'
     }
 }
 
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'banksearch',
-        'USER':'postgres',
-        'PASSWORD':'Jani@192111',
-        'HOST':'localhost',
-        'PORT':'5432'
-    }
-}"""
-
-"""DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}"""
 
 
 # Password validation

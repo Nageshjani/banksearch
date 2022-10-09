@@ -3,10 +3,11 @@
 {% extends 'home.html' %}
 {% block content %}
 
-    <div>
+    <div>     
         <form id="form-1" >
             {% csrf_token %}
-           
+
+                <div><p id="alert-1" style="background-color:red;color:black"></p></div>
                 <div class="form-group" >
                     <label for="name">BANK NAME:</label><br>
                     <input class="form-control" style=" width: 60%;"   type="text" id="name" name="name" placeholder="Bank Name.."><br>  
@@ -16,13 +17,12 @@
                     <label for="name">CITY NAME:</label><br>
                     <input class="form-control" style=" width: 60%;"  type="text" id="city" name="city" placeholder="City Name.."><br>
                 </div>
-            </div>
-
-    
            <button id="btn-1" type="submit" class="btn btn-primary" >Submit</button>
-
         </form> 
     </div>
+
+
+
 
     <div id="table-1" class="table table-striped">
     </div>
@@ -32,6 +32,7 @@
     <br>
     <div>
         <form id="form-2">
+            <div><p id="alert-2" style="background-color:red;color:black"></p></div>
             <div class="form-group">
                 <label for="ifsc">IFSC:</label><br>
                 <input type="text" id="ifsc" name="ifsc" placeholder="Ifsc Code.."><br>
@@ -59,19 +60,19 @@
                 }
                 return cookieValue;
             }
-        
+    </script>
+
+    <script type="text/javascript">
         var form_1=document.getElementById('form-1')
-        
         form_1.addEventListener('submit',function(e){
             e.preventDefault()
             var name=form_1.name.value
             var city=form_1.city.value
             console.log('form submitted', name,city)
-
-
-
             var csrftoken = getToken('csrftoken')
             var url='/branches_data/'
+
+
             fetch(url,{
                 method:"POST",
                 headers:{
@@ -82,41 +83,43 @@
             })
             .then((response)=>response.json())
             .then((data)=>{
-
-
-                var branches=data.branches_list
-
-                document.getElementById("table-1").innerHTML = "";  
-                
-                for(var i=0;i<branches.length;i++){
-                    branch=branches[i]
-                    var newTable = "<table border='1' width='100%'><tr>";
-                    for(let x in branch) { 
-                        newTable += "<tr><td align='center'>" +x+"  :  "+ branch[x] + "</td></tr>";
+                document.getElementById("alert-1").innerHTML = ""; 
+                if(data.msg_error){
+                    console.log(data.msg_error)
+                    document.getElementById("alert-1").innerHTML = data.msg_error;
+                }
+                else{
+                    var branches=data.branches_list
+                    document.getElementById("table-1").innerHTML = "";  
+                    
+                    for(var i=0;i<branches.length;i++){
+                        branch=branches[i]
+                        var newTable = "<table border='1' width='100%'><tr>";
+                        for(let x in branch) { 
+                            newTable += "<tr><td align='center'>" +x+"  :  "+ branch[x] + "</td></tr>";
+                        }
+                        newTable += "</tr></table><hr>";
+                        document.getElementById("table-1").innerHTML += newTable;
                     }
-                    newTable += "</tr></table><hr>";
-
-                    document.getElementById("table-1").innerHTML += newTable;
                 }
                 
             })
 
 
         })
-        
+    </script>
 
 
+    <script type="text/javascript">
         var form_2=document.getElementById('form-2')
-        
         form_2.addEventListener('submit',function(e){
             e.preventDefault()
             var ifsc=form_2.ifsc.value
             console.log('form submitted & ifsc ', ifsc,name)
-
-    
             var csrftoken = getToken('csrftoken')
-
             var url='/ifsc/'
+
+
             fetch(url,{
                 method:"POST",
                 headers:{
@@ -126,19 +129,24 @@
                 body:JSON.stringify({'ifsc':ifsc})
             })
             .then((response)=>response.json())
+
             .then((data)=>{
-                var branch=data.msg
-
-                document.getElementById("table-2").innerHTML = "";
-
-                var newTable = "<table border='1' width='100%'><tr>";
-                for(let x in branch) { 
-                    newTable += "<tr><td align='center'>" +x+"  :  "+ branch[x] + "</td></tr>";
+                document.getElementById("alert-2").innerHTML ="";
+                if(data.msg_error){
+                    console.log(data.msg_error)
+                    document.getElementById("alert-2").innerHTML = data.msg_error;
                 }
-                newTable += "</tr></table>";
-
-                document.getElementById("table-2").innerHTML = newTable;
-                
+                else{
+                    var branch=data.msg
+                    document.getElementById("table-2").innerHTML = "";
+                    var newTable = "<table border='1' width='100%'><tr>";
+                    for(let x in branch) { 
+                        newTable += "<tr><td align='center'>" +x+"  :  "+ branch[x] + "</td></tr>";
+                    }
+                    newTable += "</tr></table>";
+                    document.getElementById("table-2").innerHTML = newTable;
+                }
+                    
                 
             })
 
