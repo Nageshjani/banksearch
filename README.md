@@ -6,16 +6,16 @@ This is simple bank searching django-app. This app's Database is connected to aw
 
 
 
-This app has 2 API' as following:
 
-**AngularJS** is used for frontend.
+
+
 For frotned : **Javascript,Bootstrap , css**
 For Database: **AWS RDS POSTGRESQL**
 For Backend: **Python Django**
 
 
 
-**Functionalities**
+** This app has Following Main Functionalities**
 1. Fetch Banks Data By Using Bank Name & City Name:
    * e.g Bank Name :'HDFC BANK', City:'Ahmedabad'
    * output: List Of All Branches
